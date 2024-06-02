@@ -14,6 +14,9 @@
 # oFUN: the kernel function to be used for the ordinal variables (enter NA if no ordinal variables); defaults to the Wang & van Ryzin kernel
 # bw: a vector of bandwidths, likely obtained from the MSCV objective function (may use any other bandwidths). Must be same length as total number of variables in the dataframe.
 # stan: TRUE if the distance matrix should be standardized between [0,1]; FALSE otherwise
+
+## INPUT: a dataframe
+## OUTPUT: a matrix of pairwise distances
 #############################################
 
 kdsum <- function(cIND, uIND, oIND, cFUN = "c_gaussian", uFUN = "u_aitken", oFUN = "o_wangvanryzin", bw, df, stan = FALSE) {
