@@ -1,6 +1,7 @@
 #######################################################
 # The MSCV objective function for optimal bandwidth calculation as introduced in
-# Ghashti, J. S., & Thompson, J. R. (2023). Kernel Metric Learning for Clustering Mixed-type Data. arXiv preprint arXiv:2306.01890.
+# Ghashti, J. (2024). Similarity maximization and shrinkage approach in kernel metric learning for clustering mixed-type data (T). University of British Columbia. 
+# Retrieved from https://open.library.ubc.ca/collections/ubctheses/24/items/1.0443975
 
 # as called in the kdsum() function from kdsum.R
 # may also be used to calculated maximum similarity cross-validation bandwidth values based on the kdsum.R function
