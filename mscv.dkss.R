@@ -1,16 +1,4 @@
-#######################################################
-# The MSCV objective function for optimal bandwidth calculation as introduced in
-# Ghashti, J. (2024). Similarity maximization and shrinkage approach in kernel metric learning for clustering mixed-type data (T). University of British Columbia. 
-# Retrieved from https://open.library.ubc.ca/collections/ubctheses/24/items/1.0443975
-
-# as called in the kdsum() function from kdsum.R
-# may also be used to calculated maximum similarity cross-validation bandwidth values based on the kdsum.R function
-
-# To be used prior to using the kdsum function in the kdsum.R file as the bw argument vector
-# Note that any bandwidth selection technique may be used, but will not have the features outline in above paper
-#######################################################
-
-mscv_dkss <- function(df, nstart = NULL, ckernel = "c_gaussian",
+mscv.dkss <- function(df, nstart = NULL, ckernel = "c_gaussian",
                        ukernel = "u_aitken", okernel = "o_wangvanryzin", verbose = TRUE) {
   if (is.null(nstart)) {
     nstart <- ifelse(ncol(df) > 4, 3, ncol(df))
@@ -19,7 +7,7 @@ mscv_dkss <- function(df, nstart = NULL, ckernel = "c_gaussian",
   v_ck <- c("c_gaussian", "c_epanechnikov", "c_uniform", "c_triangle",
             "c_biweight", "c_triweight", "c_tricube", "c_cosine", 
             "c_logistic", "c_sigmoid", "c_silverman")
-  v_uk <- c("u_aitken", "u.aitchisonaitken")
+  v_uk <- c("u_aitken", "u_aitchisonaitken")
   v_ok <- c("o_wangvanryzin", "o_habbema", "o_aitken", "o_aitchisonaitken", "o_liracine")
   
   if (!(ckernel %in% v_ck)) {
@@ -56,7 +44,7 @@ mscv_dkss <- function(df, nstart = NULL, ckernel = "c_gaussian",
       if (fac_ind > con_ind) sapply((con_ind + 1):fac_ind, function(i) {
         max_val <- if (ukernel == "u.aitchisonaitken") {
           (max(df_ordered[, i]) - 1) / max(df_ordered[, i])
-        } else 1
+        } else 0.99999
         lambda[i] < 0 || lambda[i] > max_val
       }) else numeric(),
       if (ord_ind > fac_ind) lambda[(fac_ind + 1):ord_ind] < 0 | lambda[(fac_ind + 1):ord_ind] > 1 else numeric()
